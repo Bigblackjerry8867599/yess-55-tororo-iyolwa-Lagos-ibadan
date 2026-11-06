@@ -1,1 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mealhippo|  Preview</title>
+    <meta name="description" content="mealhippo offers curated hospitality experiences that connect passionate hosts with community-minded attendees.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Marcellus&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3e362e;
+            --secondary: #000000;
+            --dark: #3e362e;
+            --light: #000000;
+            --accent: #ffd166;
+            --text: #333333;
+            --other: #fffdd0;
+            --some: #ffffff;
+            --card-bg: #1a1a1a;
+            --dark-amethyst: #32174d;
 
+            /* brand colour — fallback behind the image */
+            --brand-forest: #556b2f;
+
+            /* shared hero + navbar background image */
+            --hero-image: url('https://i.ibb.co/KxC1Wfny/IMG-20261106-WA6112.jpg');
+
+            /* nav legibility scrim */
+            --nav-scrim: rgba(8, 12, 4, 0.45);
+
+            --font-display: 'Marcellus', 'Playfair Display', Georgia, serif;
+            --font-body: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+
+            --card-w: 260px;
+            --card-h: 340px;
+            --ring-radius: 300px;
+            --ring-stage-pad: 94px;
+
+            --nav-h: 22px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            color: #ffffff;
+            background-color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            margin: 0;
+            padding-top: 0 !important;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            letter-spacing: 0.01em;
+        }
+
+        h1, h2, h3 { text-wrap: balance; }
+
+        ::selection {
+            background: var(--accent);
+            color: var(--brand-forest);
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 3px;
+        }
+
+        /* ===== SLIM NAV — same image as hero + dark scrim ===== */
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: var(--brand-forest);
+            background-image:
+                linear-gradient(var(--nav-scrim), var(--nav-scrim)),
+                var(--hero-image);
+            background-size: cover, cover;
+            background-position: center center, center top;
+            background-repeat: no-repeat, no-repeat;
+            background-attachment: fixed, fixed;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+            padding: 0;
+            height: var(--nav-h);
+            display: flex;
+            align-items: center;
+            font-family: var(--font-body);
+            overflow: visible;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            height: 100%;
+        }
+
+        #menu-toggle {
+            display: none;
+            margin-left: 0.5rem;
+            margin-right: 0;
+            font-size: 0.9rem;
+            line-height: 1;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: #fff;
+            transition: color 0.3s ease;
+        }
+
+        #nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        #nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.95rem;
+            line-height: 1;
+            display: block;
+            letter-spacing: 0.04em;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.65);
+            transition: color 0.3s ease;
+        }
+
+        #nav-links a:hover { color: var(--accent); }
+
+        #nav-links .nav-cta {
+            background-color: var(--accent);
+            color: var(--primary);
+            padding: 0.15rem 0.7rem;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            text-shadow: none;
+        }
+
+        #nav-links.open {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            position: absolute;
+            top: var(--nav-h);
+            right: 1rem;
+            left: auto;
+            padding: 1rem;
+            background: #2f3d1a;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            gap: 1rem;
+            z-index: 999;
+            text-align: left;
+        }
+
+        /* Generic buttons (kept for the CTA section / future use) */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-weight: 700;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 17px;
+            letter-spacing: 0.04em;
+        }
+
+        .btn-primary { background-color: var(--primary); color: white; }
+        .btn-primary:hover {
+            background-color: var(--light);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        .btn-secondary:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-light { background-color: var(--accent); color: #22300f; }
+        .btn-light:hover {
+            background-color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-outline-light { background-color: transparent; border: 2px solid white; color: white; }
+        .btn-outline-light:hover {
+            background-color: #ffffff;
+            color: #22300f;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ===== HERO — image only, no content, no scrim ===== */
+        section.hero {
+            position: relative;
+            margin: 0;
+            padding: 0;
+            height: calc(100vh - var(--nav-h));
+            min-height: 320px;
+            background-color: var(--brand-forest);
+            background-image: var(--hero-image);
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            overflow: hidden;
+        }
+
+        @supports (height: 100svh) {
+            section.hero { height: calc(100svh - var(--nav-h)); }
+        }
+
+        /* ===== ROTATING CARDS ===== */
+        .rotating-cards {
+            position: relative;
+            padding: 0 0 60px;
+            background:
+                radial-gradient(circle at 50% 0%, rgba(85, 107, 47, 0.45) 0%, transparent 60%),
+                #000000;
+            overflow: hidden;
+            border-radius: 40px 40px 0 0;
+            margin-top: -40px;
+        }
+
+        .ring-stage {
+            position: relative;
+            height: calc(var(--card-h) + var(--ring-stage-pad));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1400px;
+            perspective-origin: 50% 50%;
+        }
+
+        .ring-stage::before {
+            content: '';
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 620px;
+            max-width: 90vw;
+            height: 100px;
+            background: radial-gradient(ellipse at center, rgba(255, 209, 102, 0.22), transparent 70%);
+            filter: blur(14px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .card-ring {
+            position: relative;
+            width: var(--card-w);
+            height: var(--card-h);
+            transform-style: preserve-3d;
+            transform: rotateY(0deg);
+            animation: ringSpin 26s linear infinite;
+            will-change: transform;
+            z-index: 1;
+        }
+
+        .ring-stage:hover .card-ring,
+        .ring-stage:focus-within .card-ring {
+            animation-play-state: paused;
+        }
+
+        @keyframes ringSpin {
+            from { transform: rotateY(0deg); }
+            to   { transform: rotateY(360deg); }
+        }
+
+        .rot-card {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: var(--card-w);
+            height: var(--card-h);
+            display: flex;
+            flex-direction: column;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #1e2a12;
+            border: 1px solid rgba(255, 209, 102, 0.28);
+            box-shadow: 0 22px 45px rgba(0, 0, 0, 0.6);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            transform: rotateY(calc(var(--i) * 60deg)) translateZ(var(--ring-radius));
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .rot-card img {
+            width: 100%;
+            height: 58%;
+            object-fit: cover;
+            display: block;
+            flex: 0 0 58%;
+            filter: saturate(1.05);
+        }
+
+        .rot-card-body {
+            padding: 14px 16px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1;
+        }
+
+        .rot-card-body h3 {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            line-height: 1.15;
+            color: var(--accent);
+        }
+
+        .rot-card-body p {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            line-height: 1.55;
+            color: #d6ddcc;
+        }
+
+        .rot-card-tag {
+            margin-top: auto;
+            font-family: var(--font-body);
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #a8c48a;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --card-w: 195px;
+                --card-h: 265px;
+                --ring-radius: 220px;
+                --ring-stage-pad: 78px;
+            }
+            .rotating-cards { padding: 0 0 45px; border-radius: 28px 28px 0 0; margin-top: -28px; }
+            .ring-stage { perspective: 1000px; }
+            .rot-card-body { padding: 10px 12px 12px; }
+            .rot-card-body h3 { font-size: 1.15rem; }
+            .rot-card-body p { font-size: 0.82rem; }
+        }
+
+        @media (max-width: 420px) {
+            :root {
+                --card-w: 165px;
+                --card-h: 230px;
+                --ring-radius: 185px;
+                --ring-stage-pad: 56px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .card-ring { animation: none; transform: rotateY(-20deg); }
+        }
+
+        /* Clients */
+        .clients { padding: 60px 0; background-color: var(--light); }
+
+        .section-title { text-align: center; margin-bottom: 55px; position: relative; }
+
+        .section-title h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 4vw, 3.2rem);
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            line-height: 1.15;
+            padding-bottom: 22px;
+            color: var(--accent);
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 64px;
+            height: 3px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+
+        .clients .service-content {
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .clients .service-content p {
+            font-family: var(--font-body);
+            font-size: 1.3rem;
+            line-height: 1.7;
+            letter-spacing: 0.005em;
+            color: #d6ddcc;
+        }
+
+        /* What We Do */
+        .what-we-do { padding: 100px 0; background: #1a1a1a; }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .service-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            border: 1px solid #333;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            border-color: var(--accent);
+        }
+
+        .service-icon {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--accent);
+            background-color: rgba(255, 209, 102, 0.1);
+        }
+
+        .service-content { padding: 30px; }
+
+        .service-content h3 {
+            margin-bottom: 14px;
+            color: var(--accent);
+            font-family: var(--font-display);
+            font-size: 1.65rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            line-height: 1.15;
+        }
+
+        .service-content p {
+            color: #ddd;
+            font-family: var(--font-body);
+            font-size: 1.08rem;
+            line-height: 1.7;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 100px 0;
+            background-color: var(--dark);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .how-it-works::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 C50,100 50,0 100,100 L100,0 Z" fill="rgba(85,107,47,0.14)"/></svg>');
+            background-size: cover;
+            opacity: 0.3;
+        }
+
+        .how-it-works .section-title h2 { color: var(--accent); }
+
+        .steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 40px 30px;
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .step-card:hover { transform: translateY(-10px); border-color: var(--accent); }
+
+        .step-number {
+            font-family: var(--font-display);
+            font-size: 3.4rem;
+            font-weight: 400;
+            line-height: 1;
+            letter-spacing: 0.02em;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #ffd166 0%, #d9a441 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        .step-card h3 {
+            margin-bottom: 14px;
+            font-family: var(--font-display);
+            font-size: 1.65rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            line-height: 1.15;
+            color: #fff;
+        }
+
+        .step-card p {
+            color: #ddd;
+            font-family: var(--font-body);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        /* Why Us */
+        .why-us { padding: 100px 0; background-color: #000000; }
+
+        .advantages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .advantage-card {
+            text-align: center;
+            padding: 40px 25px;
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #333;
+        }
+
+        .advantage-card:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .advantage-icon { font-size: 3rem; color: var(--accent); margin-bottom: 25px; }
+
+        .advantage-card h3 {
+            color: var(--accent);
+            margin-bottom: 14px;
+            font-family: var(--font-display);
+            font-size: 1.55rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            line-height: 1.15;
+        }
+
+        .advantage-card p {
+            color: #ddd;
+            font-family: var(--font-body);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        /* CTA */
+        .cta {
+            padding: 120px 0;
+            background: linear-gradient(135deg, var(--brand-forest) 0%, #2c3718 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.1)" /></svg>');
+            background-size: 80%;
+            background-position: center;
+            opacity: 0.3;
+        }
+
+        .cta h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2.4rem, 4.5vw, 3.4rem);
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            line-height: 1.15;
+            margin-bottom: 18px;
+            position: relative;
+        }
+
+        .cta p {
+            font-family: var(--font-body);
+            font-size: 1.3rem;
+            line-height: 1.7;
+            letter-spacing: 0.005em;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.92;
+            position: relative;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 70px 0 30px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+            justify-items: center;
+            text-align: center;
+        }
+
+        .footer-column { width: 100%; }
+
+        .footer-about p,
+        .footer-column > p {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 340px;
+            color: #ddd;
+        }
+
+        footer h3 {
+            font-family: var(--font-body);
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 18px;
+        }
+
+        footer p,
+        footer li,
+        footer .footer-links a,
+        footer .contact-info span {
+            font-family: var(--font-body);
+            font-size: 1.02rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .footer-links,
+        .contact-info { text-align: center; }
+
+        .footer-links li { margin-bottom: 12px; }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+            transition: color 0.25s ease;
+        }
+
+        .footer-links a:hover { color: var(--accent); }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .copyright p {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            letter-spacing: 0.03em;
+            color: #a3ad97;
+        }
+
+        /* ===== MOBILE NAV ===== */
+        @media (max-width: 768px) {
+            #menu-toggle { display: block; }
+            #nav-links { display: none; }
+
+            /* fixed backgrounds are unreliable on mobile —
+               pin the nav strip to the top of the same image instead */
+            nav {
+                background-attachment: scroll, scroll;
+                background-size: cover, cover;
+                background-position: center center, center top;
+            }
+        }
+
+        /* iOS ignores fixed backgrounds entirely */
+        @supports (-webkit-touch-callout: none) {
+            nav {
+                background-attachment: scroll, scroll;
+                background-position: center center, center top;
+            }
+            section.hero {
+                background-attachment: scroll;
+                background-position: center top;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <button onclick="toggleMenu()" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <ul id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="solutions.html">Solutions</a></li>
+                <li><a href="case-studies.html">Case Studies</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="https://tally.so/r/3lLGyp" class="nav-cta">Sign Up</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero" aria-label="Mealhippo banner"></section>
+
+    <section class="rotating-cards" aria-label="Featured experiences">
+        <div class="ring-stage">
+            <div class="card-ring">
+
+                <article class="rot-card" style="--i:0">
+                    <img src="https://picsum.photos/seed/mealcarta-farm/600/420" alt="Long farm table set outdoors" loading="lazy">
+                    <div class="rot-card-body">
+                        <h3> Business dinners </h3>
+                        <p> These dinners help cordinate mutual business relationships .</p>
+                        <span class="rot-card-tag">Seasonal &middot; Outdoor</span>
+                    </div>
+                </article>
+
+                <article class="rot-card" style="--i:1">
+                    <img src="https://picsum.photos/seed/mealcarta-rooftop/600/420" alt="Rooftop dinner at dusk" loading="lazy">
+                    <div class="rot-card-body">
+                        <h3> Social hubs </h3>
+                        <p> Experiental arrangements to keep you dialed in to community </p>
+                        <span class="rot-card-tag">City &middot; Evening</span>
+                    </div>
+                </article>
+
+                <article class="rot-card" style="--i:2">
+                    <img src="https://picsum.photos/seed/mealcarta-kitchen/600/420" alt="Hands cooking in a shared kitchen" loading="lazy">
+                    <div class="rot-card-body">
+                        <h3>Experiental  Learning</h3>
+                        <p>Discover new things ,engage with the builders of tomorrow;find hosts and attendees intend on showing and sharing knowledge</p>
+                        <span class="rot-card-tag">Workshop &middot; Hands-on</span>
+                    </div>
+                </article>
+
+                <article class="rot-card" style="--i:3">
+                    <img src="https://picsum.photos/seed/mealcarta-orchard/600/420" alt="Picnic under orchard trees" loading="lazy">
+                    <div class="rot-card-body">
+                        <h3> Culinary-Tourism</h3>
+                        <p> Engage with the tastemakers(literally) of today by slowly unravelling their "sauce" code;trace the origins,feel the people.</p>
+                        <span class="rot-card-tag">Daylight &middot; Family</span>
+                    </div>
+                </article>
+
+                <article class="rot-card" style="--i:4">
+                    <img src="https://picsum.photos/seed/mealcarta-chef/600/420" alt="Chef plating a dish at the counter" loading="lazy">
+                    <div class="rot-card-body">
+                        <h3> Mealcards</h3>
+                        <p> These are digital tokens and or printed cards that  pay for meals in curated spaces</p>
+                        <span class="rot-card-tag">Intimate &middot; Tasting</span>
+                    </div>
+                </article>
+
+                <article class="rot-card" style="--i:5">
+                    <img src="https://picsum.photos/seed/mealcarta-brunch/600/420" alt="Community brunch spread" loading="lazy">
+                    <div class="rot-card-body">
+                        <h3> Parent-conferences</h3>
+                        <p> True,we articulate social problems during our meetups,there is no better day to cast a brick in the foundation of our youth.</p>
+                        <span class="rot-card-tag">Weekend &middot; Social</span>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="clients">
+        <div class="container">
+            <div class="section-title">
+                <h2> Portfolio-What we focus on </h2>
+            </div>
+            <div class="service-content">
+                <p>MealHippo is a social platform that uses meal cards to give people access to spaces for business, networking, and community events </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="what-we-do">
+        <div class="container">
+            <div class="section-title">
+                <h2>What We Offer</h2>
+            </div>
+            <div class="services">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-calendar-check"></i></div>
+                    <div class="service-content">
+                        <h3>Curated Experiences</h3>
+                        <p>We carefully select and vet hosts and itineraries to ensure high-quality, memorable experiences that contribute in meaningful ways .</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-users"></i></div>
+                    <div class="service-content">
+                        <h3>Community Building</h3>
+                        <p>Our algorithm connects similarly-minded individuals to foster organic relationships and better networks</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div class="service-content">
+                        <h3>Secure Platform</h3>
+                        <p>We provide a safe, reliable environment for hosts and attendees with secure payments and well researched itineraries  </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>How It Works</h2>
+            </div>
+            <div class="steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Discover Experiences</h3>
+                    <p>Browse our selection of gatherings in your area - from cooking classes,businessmeets, culinary tours,parents-meetups, nature hikes and reading clubs(and so on).</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Express interest/Book Your Spot</h3>
+                    <p>Reserve your place or book (depending on system). Receive all details and preparation instructions.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Connect & Enjoy</h3>
+                    <p>Attend the event, meet like-minded people, and share your time.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Become a Host</h3>
+                    <p>Share your passion! Apply to host your own events and build your community following.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-us">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose mealhippo</h2>
+            </div>
+            <div class="advantages">
+                <div class="advantage-card">
+                    <div class="advantage-icon"><i class="fas fa-heart"></i></div>
+                    <h3>Authentic Connections</h3>
+                    <p>Our matching algorithm ensures you meet people who share your interests and values.</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon"><i class="fas fa-star"></i></div>
+                    <h3>Quality Experiences</h3>
+                    <p>Every host is vetted to ensure exceptional, memorable gatherings.</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon"><i class="fas fa-lock"></i></div>
+                    <h3>Safe & Secure</h3>
+                    <p>Verified profiles and secure payments give you peace of mind.</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon"><i class="fas fa-users"></i></div>
+                    <h3>Community Focus</h3>
+                    <p>We're building networks that extend beyond single events.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Join Our Community?</h2>
+            <p> Buy a Mealcard and or sign-up (top via menu).Also you can shoot us a message via mail. Join the company of thousands.</p>
+        </div>
+    </section>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+
+            <div class="footer-column">
+                <h3>Mealhippo Solutions</h3>
+                <p style="margin: 15px 0;">Creating innovative solutions that bridge communities and technology for sustainable impact.</p>
+            </div>
+
+            <div class="footer-column">
+                <h3>Values</h3>
+                <ul class="contact-info" style="list-style: none; padding: 0; margin: 15px 0;">
+                    <li style="margin: 8px 0;"><span>Teamwork</span></li>
+                    <li style="margin: 8px 0;"><span>Innovation</span></li>
+                    <li style="margin: 8px 0;"><span>Reliability</span></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links" style="list-style: none; padding: 0; margin: 15px 0;">
+                    <li style="margin: 8px 0;"><a href="index.html">Home</a></li>
+                    <li style="margin: 8px 0;"><a href="solutions.html">Solutions</a></li>
+                    <li style="margin: 8px 0;"><a href="case-studies.html">Case-studies</a></li>
+                    <li style="margin: 8px 0;"><a href="about.html">About</a></li>
+                    <li style="margin: 8px 0;"><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Legal</h3>
+                <ul class="footer-links" style="list-style: none; padding: 0; margin: 15px 0;">
+                    <li style="margin: 8px 0;"><a href="legal.html#privacy">Privacy Policy</a></li>
+                    <li style="margin: 8px 0;"><a href="legal.html#terms">Terms of Service</a></li>
+                    <li style="margin: 8px 0;"><a href="legal.html#cookie">Cookie Policy</a></li>
+                    <li style="margin: 8px 0;"><a href="legal.html#accessibility">Accessibility</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2026 mealhippo. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        function toggleMenu() {
+            const links = document.getElementById('nav-links');
+            const toggle = document.getElementById('menu-toggle');
+            const isOpen = links.classList.toggle('open');
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        }
+
+        function handleResize() {
+            if (window.innerWidth > 768) {
+                document.getElementById('nav-links').classList.remove('open');
+            }
+        }
+
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('load', handleResize);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = { threshold: 0.1 };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = "1";
+                        entry.target.style.transform = "translateY(0)";
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.style.opacity = "0";
+                card.style.transform = "translateY(20px)";
+                card.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+                observer.observe(card);
+            });
+
+            document.querySelectorAll('.step-card').forEach(card => {
+                card.style.opacity = "0";
+                card.style.transform = "translateY(20px)";
+                card.style.transition = "opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s";
+                observer.observe(card);
+            });
+
+            document.querySelectorAll('.advantage-card').forEach(card => {
+                card.style.opacity = "0";
+                card.style.transform = "translateY(20px)";
+                card.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+      </html>
